@@ -1,0 +1,26 @@
+.clockpage {
+  margin: 0;
+  position: absolute;
+  left: 1%;
+  max-width: 170px;
+  background: #fff9cf;
+  text-align: center;
+  font-size: 18px;
+  padding: 10px;
+  font-weight: bold;
+  border-top: 10px solid #e4a46fcc;
+  margin-top: 10px;
+}
+
+#dayOfWeek {
+  display: block;
+  font-weight: normal;
+  font-size: 18px;
+}
+
+#timer-counter
+{
+  color:red;
+  font-size:150%;
+  font-weight:bold;
+}
