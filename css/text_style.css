@@ -1,0 +1,15 @@
+li.list{
+    text-align: left;
+  }
+  
+  
+  .text_position{
+    padding-right: 20%;
+    display: table;
+  }
+  
+  .material_text{
+    padding-bottom: 3%;
+    align-items: center;
+  }
+  
