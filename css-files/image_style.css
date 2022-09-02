@@ -1,0 +1,26 @@
+
+.image_shops{
+    width: 350px;
+    height: 150px;
+    align-items: top;
+  }
+
+  
+.image_material{
+    border-style: solid;
+    border-width: medium;
+    border-color: black;
+    width: 200px;
+    height: 200px;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+    margin-top: 2%;
+  }
+
+  
+.image_style{
+    margin: 10px;
+    border-style: solid;
+    border-width: medium;
+    border-color: black;
+  }
