@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация</title>
+    <link href="css-files/main_style.css" rel="stylesheet" type="text/css">
+    <link href="css-files/clocks.css" rel="stylesheet" type="text/css">
+    <script src="js-files/registration-check.js" type="text/javascript"></script>
+
+    <style>
+        * {
+            box-sizing: border-box
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 30px;
+            color: #990e00;
+        }
+
+        /* Add padding to containers */
+        .container {
+            padding: 16px;
+            margin-left: auto;
+            margin-right: auto;
+            width: 60%;
+        }
+
+        label {
+            margin-top: 15px;
+        }
+
+        /* Full-width input fields */
+        input[type=text],
+        input[type=password] {
+            width: 100%;
+            padding: 15px;
+            margin: 5px 0 0 0;
+            display: inline-block;
+
+            background: #fff5c4;
+            box-shadow: none;
+            border: 1px solid #990e00;
+            border-radius: 5px;
+        }
+
+        input[type=text]:focus,
+        input[type=password]:focus {
+            background-color: white;
+            outline: none;
+        }
+
+        /* Overwrite default styles of hr */
+        hr {
+            border: none;
+            /* Убираем границу */
+            background-color: #92361ac7;
+            /* Цвет линии */
+            color: #92361ac7;
+            /* Цвет линии для IE6-7 */
+            height: 1px;
+            /* Толщина линии */
+            margin: 20px;
+        }
+
+        /* Set a style for the submit/register button */
+        .btn {
+            background-color: #990e00;
+            color: white;
+            padding: 16px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            opacity: 0.9;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            opacity: 1;
+        }
+
+        span.red {
+            color: red;
+        }
+
+        .errorsHelp {
+            color: red;
+            font-size: 12px;
+            visibility: hidden;
+            line-height: 1.5;
+            display: inline-block;
+        }
+
+        .reg{
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+
+<body link="#FF2201" vlink="#990E00">
+    <div class="container">
+        <h2>
+            Зарегистрироваться
+        </h2>
+
+        <hr>
+        <p style="font-size: 12px; margin-bottom: 10px;">
+            <span class="red">*</span> &mdash; обязательные поля для заполнения
+        </p>
+        <form name="register" style="text-align: left; font-size: 18px; line-height: 30px;;">
+            <label for="nickname"><b>Имя на сайте</b><span class="red">*</span></label>
+            <input type="text" id="nickname" placeholder="Введите никнейм" onblur="checkNickname();" required>
+            <span class="errorsHelp" id="nicknameErr">Ошибка<br></span>
+
+            <br>
+
+            <label for="psw"><b>Пароль</b><span class="red">*</span></label>
+            <input type="password" title="Пароль может содержать только буквы и цифры" id="psw"
+                placeholder="Введите пароль" onblur = "checkPsw();" required>
+            <span class="errorsHelp" id="pswErr">Ошибка<br></span>
+
+            <br>
+
+            <label for="repeatpsw"><b>Повторите пароль</b><span class="red">*</span></label>
+            <input type="password" id="repeatpsw" placeholder="Повторите пароль" onblur = "checkRepeatPsw();" required>
+            <span class="errorsHelp" id="repeatpswErr">Ошбика<br></span>
+
+            <br>
+
+            <label for="surname"><b>Фамилия</b><span class="red">*</span></label>
+            <input type="text" id="surname" placeholder="Введите фамилию" onblur="checkSurname();" required>
+            <span class="errorsHelp" id="surnameErr">Ошибка<br></span>
+
+            <br>
+
+            <label for="name"><b>Имя</b><span class="red">*</span></label>
+            <input type="text" id="name" placeholder="Введите имя" onblur="checkName();" required>
+            <span class="errorsHelp" id="nameErr">Ошибка<br></span>
+
+            <br>
+
+            <label for="patronymic"><b>Отчество</b></label>
+            <input type="text" id="patronymic" placeholder="Введите отчество (при наличии)" onblur="checkPatronymic();">
+            <span class="errorsHelp" id="patronymicErr">Ошибка<br></span>
+
+            <br>
+
+            <label for="number"><b>Контактный телефон</b><span class="red">*</span></label>
+            <input type="text" id="number" placeholder="Слитно, начиная с цифры 8" maxlength="11" onblur="checkNumber();" required>
+            <span class="errorsHelp" id="numberErr">Ошибка<br></span>
+
+            <br>
+
+            <label for="email"><b>Электронный адрес</b><span class="red">*</span></label>
+            <input type="text" id="email" placeholder="Введите e-mail" onblur="checkEmail();" required>
+            <span class="errorsHelp" id="emailErr">Ошибка<br></span>
+
+            <br>
+            
+            <label for="sex"><b>Пол</b></label>
+            <div name="sex">
+
+                <input type="radio" name="male">
+                <label for="male">Мужской</label>
+                &nbsp;&nbsp;
+
+                <input type="radio" name="female">
+                <label for="female">Женский</label>
+            </div>
+            <br>
+
+            <input type="checkbox" name="mailing">
+            <label for="mailing">Получать рассылку на электронный адрес</label>
+            <br>
+            <input type="checkbox" name="rules" required>
+            <label for="rules">Я прочитал(а) правила сайта и согласен(на) с ними<span class="red">*</span></label>
+
+            <button type="submit" id="btnreg" class="btn" onclick="btnRegister();">
+                Зарегистрироваться
+            </button>
+        </form>
+    </div>
+</body>
+
+</html>
