@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Уроки вышивания</title>
+	<link href="css-files/main_style.css" rel="stylesheet" type="text/css">
+	<link href="css-files/image_style.css" rel="stylesheet" type="text/css">
+	<link href="css-files/text_style.css" rel="styles heet" type="text/css">
+	<link href="css-files/clocks.css" rel="stylesheet" type="text/css">
+	<script src="js-files/main.js" type="text/javascript"></script>
+	<style type="text/css">
+		h4 {
+			text-align: center;
+			color: darkred;
+		}
+	</style>
+</head>
+
+<body link="#FF2201" vlink="#990E00" onload="clockTimer(); getSecs();">
+	<div class="main">
+		<div class="clockpage">
+			<span id="clock"></span>
+			<span id="dayOfWeek"></span>
+		</div>
+
+		<a name="top"></a>
+
+		<div class="top_page">
+			<h1>
+				ВЫШИВАНИЕ
+			</h1>
+			<h3>
+				всё о вашем любимом хобби
+			</h3>
+		</div>
+
+		<div style="text-align: center; padding: 20px;">
+			Вы находитесь на этой странице уже
+			<span id='timer-counter' style='color:red;font-size:150%;font-weight:bold;'></span>
+			сек.
+		</div>
+
+		<div>
+			<table class="menu">
+				<tr>
+					<td id="index" onMouseOver="menu_onMouseOver('index');" onMouseOut="menu_onMouseOut('index')">
+						<a class="menu_link" href="index.html">Главная</a>
+					</td>
+					<td id="history" onMouseOver="menu_onMouseOver('history');" onMouseOut="menu_onMouseOut('history')">
+						<a class="menu_link" href="history.html">История вышивания</a>
+					</td>
+					<td id="types" onMouseOver="menu_onMouseOver('types');" onMouseOut="menu_onMouseOut('types')">
+						<a class="menu_link" href="types.html">Виды вышивания</a>
+					</td>
+					<td id="materials" onMouseOver="menu_onMouseOver('materials');"
+						onMouseOut="menu_onMouseOut('materials')">
+						<a class="menu_link" href="materials.html">Материалы для вышивания</a>
+					</td>
+					<td id="lessons" class="active">
+						<a class="menu_link" href="lessons.html">Уроки вышивания</a>
+					</td>
+					<td id="patterns" onMouseOver="menu_onMouseOver('patterns');"
+						onMouseOut="menu_onMouseOut('patterns')">
+						<a class="menu_link" href="patterns.html">Схемы для вышивания</a>
+					</td>
+					<td id="shops" onMouseOver="menu_onMouseOver('shops');" onMouseOut="menu_onMouseOut('shops')">
+						<a class="menu_link" href="shops.html">Магазины</a>
+					</td>
+				</tr>
+			</table>
+		</div>
+
+		<div class="content">
+			<div class="button">
+				<a href="#bottom">
+					<img src="images/strelka_vnis.png" title="Стрелка вниз" alt="Вниз" width="50" height="50">
+				</a>
+			</div>
+			<h4>
+				Здесь представлены ссылки на уроки по вышиванию по
+				определенному виду. 
+				<br>
+				Достаточно просто кликнуть на
+				нужную Вам картинку!
+			</h4>
+			<p style="text-align: center; padding: 5px;">
+				<img src="images/lessons_map.png" width="645" height="485" usemap="#types">
+			</p>
+
+			<map name="types">
+				<area shape=rect coords="0, 0, 320, 240"
+					href="https://www.youtube.com/playlist?list=PL3cBQQh94Hp-DPpXEihOnY_HZz_83cCIh" target="_blank"
+					alt="Вышивка крестом" title="Вышивка крестом">
+				<area shape=rect coords="325, 0, 645, 240"
+					href="https://www.youtube.com/playlist?list=PLN2FdWmzzrBNt9CgNxkRW5ZCBshAwPcth" target="_blank"
+					alt="Вышивка гладью" title="Вышивка гладью">
+				<area shape=rect coords="0, 245, 325, 485"
+					href="https://www.youtube.com/playlist?list=PL7-fFZ07eJDW0sGceVMRbKve8UrlPjN-s" target="_blank"
+					alt="Вышивка лентами" title="Вышивка лентами">
+				<area shape=rect coords="325, 245, 645, 485"
+					href="https://www.youtube.com/playlist?list=PLgEktIKxgWtwCv6VvX1MNVNgNhosmHa8x" target="_blank"
+					alt="Вышивка бисером" title="Вышивка бисером">
+			</map>
+			<a name="bottom"></a>
+		</div>
+		<div class="bottom_page">
+			<div class="button">
+				<a href="#top">
+					<img src="images/strelka_vverh.png" title="Стрелка вверх" alt="Вверх" width="50" height="50">
+				</a>
+			</div>
+			<p>
+				По вопросам работы сайта и с предложениями его улучшения обращаться по электронной почте:
+				<a href="mailto: alicewhite00@mail.ru">alicewhite00@mail.ru</a>.
+			</p>
+		</div>
+	</div>
+</body>
+
+</html>
