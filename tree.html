@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Дерево элементов</title>
+    <style>
+        .block {
+            border: solid 1px;
+            position: absolute;
+            text-align: center;
+            width: 80px;
+            height: 50px;
+        }
+
+        .line {
+            border-left: solid 1px;
+            border-top: solid 1px;
+            position: absolute;
+        }
+
+        #image {
+            max-width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div>Добрый день!</div>
+    <div id='div_1'>Чтобы перейти на сайт, нажмите кнопку ниже:
+    </div>
+    <div>
+        <button>
+            <a href="index.html">Открыть сайт</a>
+        </button>
+    </div>
+    <div>
+        <img src="images/shipovnik.jpg" title="Шиповник" alt="Шиповник вышивка">
+    </div>
+
+    <script>
+        function El(t, l) {//конструктор элементов
+            this.text = t;//тэг или текст элемента
+            this.level = l;//уровень
+            this.x; this.y;//координаты
+            this.child = [];//массив потомков, будет содержать индексы
+        }
+
+        var elements = [];//массив элементов
+        var iEl = 0;//Индекс массива элементов
+
+        function DOM_Tree(el, l) {
+            //el - элемент
+            //l - уровень елемента
+            //Если элемент комментарий или текстовый и не отображается, то выходим
+            if ((el == '[object Text]' && el.data < 32) || el == '[object Comment]') return;
+            //Создаём текст элемента
+            t = el == '[object Text]' ? el.data : el.tagName;
+            //Создаём новый элемент в массиве
+            var curEL = iEl++;//Индекс текущего элемента
+            elements[curEL] = new El(t, l);
+            //Если потомков нет или текущий элемент script, то
+            if (el.childNodes.length == 0 || el.tagName == 'SCRIPT')
+                return;//выходим
+            else {//Если потомки есть, то
+                var iChild = 0;//Индекс массива потомков
+                for (var i = 0; i < el.childNodes.length; i++) {
+                    if (!(el.childNodes[i] == '[object Text]' && el.childNodes[i].data < 32))
+                        elements[curEL].child[iChild++] = iEl;//заполняем массив потомков
+                    DOM_Tree(el.childNodes[i], l + 1);//для каждого потомка вызываем DOM_Tree
+                }
+            }
+        }
+
+        //Создаём массив элементов
+        DOM_Tree(document.body, 0);
+
+        //Создаём новое окно
+        var treeWin = open();
+
+        //Вставляем таблицу стилей
+        var sStyleSheet =
+            '<head>' +
+            '<style>' +
+            '.block {' +
+            '  border:solid 1px;' +
+            '  position:absolute;' +
+            '  text-align:center;' +
+            '  width: 90px;' +
+            '  height:50px;' +
+            '  margin-left: 10px;' +
+            '}' +
+            '.line {' +
+            '  border-left:solid 1px;' +
+            '  border-top:solid 1px;' +
+            '  position:absolute;' +
+            '}' +
+            '</style>' +
+            '</head>';
+        treeWin.document.write(sStyleSheet);
+
+        //Функция вывода блока
+        //x,y - координата; s - строка внутри блока
+        function blockDraw(x, y, s) {
+            var sTemp = '<table class = "block" style = "left:' +
+                (x - 40) +//Вставка координаты x
+                'px;top:' +
+                y +//Вставка координаты y
+                'px;"><td>' +
+                s +//Вставка текста
+                '</td></table>';
+            treeWin.document.write(sTemp);
+        }
+
+        //Функция рисует линию от (x1;y1) до (x2;y2)
+        function lineDraw(x1, y1, x2, y2) {
+            var sTemp = '<span class = "line" style = "left:' +
+                (x1 < x2 ? x1 : x2) +
+                'px;top:' +
+                (y1 < y2 ? y1 : y2) +
+                'px;height:' +
+                Math.abs(y2 - y1) +
+                'px;width:' +
+                Math.abs(x2 - x1) +
+                'px;"></span>';
+            treeWin.document.write(sTemp);
+        }
+
+        //Функция нахождения максимального количества дочерних элементов на одном уровне
+        function maxEl(iEl) {
+            var num = 0;
+            if (elements[iEl].child.length == 0)
+                num = 1
+            else {
+                for (var i = 0; i < elements[iEl].child.length; i++)
+                    num += maxEl(elements[iEl].child[i]);
+            }
+            return num;
+        }
+
+        //Функция заполняет координатами элементы массива элементов
+        function calcCoords(iEl, leftBorder) {
+            var mEl = maxEl(iEl);//Макс количество элементов на уровне
+            if (mEl == 0)
+                elements[iEl].x = leftBorder + 50
+            else
+                elements[iEl].x = mEl * 100 / 2 + leftBorder;
+            elements[iEl].y = elements[iEl].level * 80 + 20;
+            if (elements[iEl].child.length > 0) {
+                var lB = leftBorder;
+                for (var i = 0; i < elements[iEl].child.length; i++) {
+                    calcCoords(elements[iEl].child[i], lB);
+                    lB = lB + maxEl(elements[iEl].child[i]) * 100;
+                }
+            };
+        }
+
+        calcCoords(0, 0);
+
+        //Функция соединяет линиями блоки элементов
+        function lineConnect(iEl) {
+            //Если нет предков, то выходим
+            if (elements[iEl].child.length == 0) return;
+            //Рисуем линии к каждому предку
+            for (var i = 0; i < elements[iEl].child.length; i++) {
+                var x1, y1, x2, y2;
+                x1 = elements[iEl].x;
+                y1 = elements[iEl].y + 50;
+                x2 = x1;
+                y2 = y1 + 15;
+                lineDraw(x1, y1, x2, y2)
+                y1 = y2;
+                x2 = elements[elements[iEl].child[i]].x;
+                lineDraw(x1, y1, x2, y2)
+                x1 = x2;
+                y2 = elements[elements[iEl].child[i]].y;
+                lineDraw(x1, y1, x2, y2)
+            }
+        }
+
+        //Непосредственно рисуем блоки с элементами
+        for (var i = 0; i < elements.length; i++) {
+            blockDraw(elements[i].x, elements[i].y, elements[i].text.substr(0, elements[i].length));
+            lineConnect(i);
+        }
+    </script>
+</body>
+
+</html>
